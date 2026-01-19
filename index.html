@@ -1,3 +1,580 @@
-kjhsdjkfhskdjhfs
-dfssdfsdfsdf
-<fieldset>sdf</fieldset>
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>HighRoller - Live Betting, Smarter Plays</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Righteous&family=Space+Grotesk:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --ink: #0f1115;
+        --paper: #f7f3ea;
+        --accent: #f25c2a;
+        --accent-2: #f7b801;
+        --teal: #1d7874;
+        --night: #0a0d14;
+        --muted: #6f6c66;
+        --card: rgba(255, 255, 255, 0.7);
+        --glass: rgba(255, 255, 255, 0.08);
+        --stroke: rgba(0, 0, 0, 0.15);
+        --shadow: 0 20px 60px rgba(0, 0, 0, 0.18);
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        height: 100%;
+      }
+
+      body {
+        margin: 0;
+        font-family: "Space Grotesk", "Segoe UI", sans-serif;
+        color: var(--ink);
+        background: radial-gradient(circle at top left, #fff0d7 0%, transparent 55%),
+          radial-gradient(circle at 80% 20%, rgba(247, 184, 1, 0.4) 0%, transparent 55%),
+          linear-gradient(135deg, #f8f2e7 0%, #f2efe6 40%, #f0f6f6 100%);
+      }
+
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      .page {
+        min-height: 100%;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .nav {
+        position: sticky;
+        top: 0;
+        z-index: 10;
+        backdrop-filter: blur(18px);
+        background: rgba(255, 255, 255, 0.7);
+        border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+      }
+
+      .nav-inner {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 18px 24px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+
+      .logo {
+        font-family: "Righteous", "Space Grotesk", sans-serif;
+        font-size: 22px;
+        letter-spacing: 0.06em;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .logo-badge {
+        width: 36px;
+        height: 36px;
+        border-radius: 12px;
+        display: grid;
+        place-items: center;
+        background: linear-gradient(135deg, var(--accent) 0%, var(--accent-2) 100%);
+        color: #fff;
+        font-weight: 700;
+        box-shadow: 0 10px 20px rgba(242, 92, 42, 0.3);
+      }
+
+      .nav-links {
+        display: flex;
+        align-items: center;
+        gap: 24px;
+        font-size: 15px;
+        color: var(--muted);
+      }
+
+      .nav-links a:hover {
+        color: var(--ink);
+      }
+
+      .cta {
+        padding: 12px 22px;
+        border-radius: 999px;
+        font-weight: 600;
+        background: var(--ink);
+        color: #fff;
+        box-shadow: 0 12px 30px rgba(15, 17, 21, 0.25);
+      }
+
+      .hero {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 80px 24px 40px;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 48px;
+        align-items: center;
+      }
+
+      .hero h1 {
+        font-family: "Righteous", "Space Grotesk", sans-serif;
+        font-size: clamp(2.8rem, 4vw, 4.2rem);
+        margin: 0 0 18px;
+        line-height: 1.02;
+      }
+
+      .hero p {
+        font-size: 1.1rem;
+        color: var(--muted);
+        margin: 0 0 28px;
+      }
+
+      .hero-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 16px;
+        align-items: center;
+      }
+
+      .ghost {
+        border: 1px solid var(--stroke);
+        padding: 12px 22px;
+        border-radius: 999px;
+        color: var(--ink);
+        font-weight: 600;
+        background: rgba(255, 255, 255, 0.7);
+      }
+
+      .hero-card {
+        position: relative;
+        background: var(--night);
+        color: #fff;
+        border-radius: 32px;
+        padding: 32px;
+        box-shadow: var(--shadow);
+        overflow: hidden;
+      }
+
+      .hero-card::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: radial-gradient(circle at top left, rgba(242, 92, 42, 0.4), transparent 55%),
+          radial-gradient(circle at bottom right, rgba(29, 120, 116, 0.5), transparent 50%);
+        opacity: 0.9;
+        pointer-events: none;
+      }
+
+      .hero-card > * {
+        position: relative;
+        z-index: 1;
+      }
+
+      .live-odds {
+        display: grid;
+        gap: 16px;
+        margin-top: 24px;
+      }
+
+      .odds-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 14px 18px;
+        border-radius: 14px;
+        background: var(--glass);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+      }
+
+      .pill {
+        font-size: 12px;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: rgba(255, 255, 255, 0.7);
+      }
+
+      .odds-value {
+        font-weight: 600;
+        font-size: 18px;
+      }
+
+      .section {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 60px 24px;
+      }
+
+      .section-title {
+        display: flex;
+        align-items: baseline;
+        justify-content: space-between;
+        gap: 24px;
+        margin-bottom: 28px;
+      }
+
+      .section-title h2 {
+        margin: 0;
+        font-size: 2rem;
+      }
+
+      .section-title p {
+        margin: 0;
+        color: var(--muted);
+      }
+
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+        gap: 24px;
+      }
+
+      .card {
+        background: var(--card);
+        border-radius: 24px;
+        padding: 22px;
+        box-shadow: 0 16px 40px rgba(0, 0, 0, 0.08);
+        border: 1px solid rgba(0, 0, 0, 0.06);
+        backdrop-filter: blur(18px);
+      }
+
+      .card strong {
+        font-size: 18px;
+      }
+
+      .stat {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        font-weight: 600;
+      }
+
+      .stat span {
+        color: var(--muted);
+        font-weight: 400;
+      }
+
+      .feature-icon {
+        width: 44px;
+        height: 44px;
+        border-radius: 14px;
+        background: linear-gradient(145deg, #fff 0%, #ffe2c7 100%);
+        display: grid;
+        place-items: center;
+        font-weight: 700;
+        margin-bottom: 12px;
+      }
+
+      .ticker {
+        display: grid;
+        gap: 12px;
+      }
+
+      .ticker-row {
+        display: grid;
+        grid-template-columns: 1.2fr 0.8fr 0.8fr;
+        gap: 12px;
+        padding: 14px 16px;
+        border-radius: 14px;
+        background: rgba(255, 255, 255, 0.8);
+        border: 1px solid rgba(0, 0, 0, 0.06);
+        font-size: 14px;
+      }
+
+      .ticker-row strong {
+        font-weight: 600;
+      }
+
+      .cta-band {
+        background: linear-gradient(135deg, #0f1115 0%, #1d1f26 50%, #0f1115 100%);
+        color: #fff;
+        padding: 60px 24px;
+        margin-top: 40px;
+      }
+
+      .cta-inner {
+        max-width: 1200px;
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+        gap: 24px;
+        align-items: center;
+      }
+
+      .cta-inner h3 {
+        margin: 0;
+        font-size: 2.4rem;
+      }
+
+      .cta-panel {
+        background: rgba(255, 255, 255, 0.06);
+        border-radius: 22px;
+        padding: 24px;
+        border: 1px solid rgba(255, 255, 255, 0.15);
+      }
+
+      .footer {
+        padding: 32px 24px 40px;
+        color: var(--muted);
+        font-size: 13px;
+        text-align: center;
+      }
+
+      .stagger {
+        opacity: 0;
+        transform: translateY(20px);
+        animation: rise 0.7s ease forwards;
+      }
+
+      .stagger:nth-child(2) {
+        animation-delay: 0.1s;
+      }
+
+      .stagger:nth-child(3) {
+        animation-delay: 0.2s;
+      }
+
+      .stagger:nth-child(4) {
+        animation-delay: 0.3s;
+      }
+
+      @keyframes rise {
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @media (max-width: 900px) {
+        .nav-links {
+          display: none;
+        }
+      }
+
+      @media (max-width: 600px) {
+        .hero {
+          padding-top: 50px;
+        }
+
+        .section-title {
+          flex-direction: column;
+          align-items: flex-start;
+        }
+
+        .hero-actions {
+          flex-direction: column;
+          align-items: stretch;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="page">
+      <header class="nav">
+        <div class="nav-inner">
+          <div class="logo">
+            <div class="logo-badge">HR</div>
+            HighRoller
+          </div>
+          <nav class="nav-links">
+            <a href="#features">Why us</a>
+            <a href="#markets">Live markets</a>
+            <a href="#insights">Insights</a>
+          </nav>
+          <a class="cta" href="#cta">Get the app</a>
+        </div>
+      </header>
+
+      <main>
+        <section class="hero">
+          <div>
+            <div class="pill">Live odds, lightning payouts</div>
+            <h1>Make every match a moment. Bet smarter, win faster.</h1>
+            <p>
+              HighRoller combines real-time odds, crisp insights, and a clean bankroll tracker to help you
+              place confident plays without the noise.
+            </p>
+            <div class="hero-actions">
+              <a class="cta" href="#cta">Start your free trial</a>
+              <a class="ghost" href="#markets">Explore live markets</a>
+            </div>
+            <div class="grid" style="margin-top: 28px;">
+              <div class="card stat">
+                120+ <span>Leagues covered</span>
+              </div>
+              <div class="card stat">
+                3-sec <span>avg. payout speed</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="hero-card">
+            <div class="pill">Tonight's hot streaks</div>
+            <h3 style="margin: 12px 0 0; font-size: 1.6rem;">Live Edge Board</h3>
+            <div class="live-odds">
+              <div class="odds-row">
+                <div>
+                  <div style="font-weight: 600;">Seoul Tigers vs. Sydney Blaze</div>
+                  <div class="pill">Quarter 3</div>
+                </div>
+                <div class="odds-value">+142</div>
+              </div>
+              <div class="odds-row">
+                <div>
+                  <div style="font-weight: 600;">Atletico Nova vs. Rayo Norte</div>
+                  <div class="pill">83'</div>
+                </div>
+                <div class="odds-value">-115</div>
+              </div>
+              <div class="odds-row">
+                <div>
+                  <div style="font-weight: 600;">Oslo Lights vs. Berlin Forge</div>
+                  <div class="pill">2nd set</div>
+                </div>
+                <div class="odds-value">+205</div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section id="features" class="section">
+          <div class="section-title">
+            <h2>Built for momentum.</h2>
+            <p>Fast decisions, controlled bankrolls, and a view of the whole board.</p>
+          </div>
+          <div class="grid">
+            <div class="card stagger">
+              <div class="feature-icon">A1</div>
+              <strong>Instant line alerts</strong>
+              <p>Catch movement the moment it shifts. Customize alerts by league, market, or spread.</p>
+            </div>
+            <div class="card stagger">
+              <div class="feature-icon">BX</div>
+              <strong>Smart slip builder</strong>
+              <p>Stack, hedge, and cash out with a clean builder that keeps your plays focused.</p>
+            </div>
+            <div class="card stagger">
+              <div class="feature-icon">Q+</div>
+              <strong>Confidence meter</strong>
+              <p>See how your picks score against recent form, injuries, and public sentiment.</p>
+            </div>
+            <div class="card stagger">
+              <div class="feature-icon">24</div>
+              <strong>Always-on support</strong>
+              <p>Human help in under 60 seconds when every play feels like a photo finish.</p>
+            </div>
+          </div>
+        </section>
+
+        <section id="markets" class="section">
+          <div class="section-title">
+            <h2>Live markets in motion.</h2>
+            <p>Scroll the board like a trader. Tap for trends, tap again to play.</p>
+          </div>
+          <div class="grid">
+            <div class="card">
+              <div class="ticker">
+                <div class="ticker-row">
+                  <strong>Premier League</strong>
+                  <span>Spreads</span>
+                  <strong>+104</strong>
+                </div>
+                <div class="ticker-row">
+                  <strong>NBA</strong>
+                  <span>Totals</span>
+                  <strong>-112</strong>
+                </div>
+                <div class="ticker-row">
+                  <strong>NHL</strong>
+                  <span>Puckline</span>
+                  <strong>+138</strong>
+                </div>
+                <div class="ticker-row">
+                  <strong>UFC</strong>
+                  <span>Fight props</span>
+                  <strong>+166</strong>
+                </div>
+              </div>
+            </div>
+            <div class="card">
+              <h3 style="margin-top: 0;">Top movers</h3>
+              <div class="stat" style="margin-bottom: 12px;">
+                Valencia Storm <span>+110</span>
+              </div>
+              <div class="stat" style="margin-bottom: 12px;">
+                Kyoto Royals <span>-125</span>
+              </div>
+              <div class="stat">
+                Montreal Arrows <span>+140</span>
+              </div>
+            </div>
+            <div class="card">
+              <h3 style="margin-top: 0;">Cash-out power</h3>
+              <p>Auto-lock winnings with one swipe or keep the play live if the odds keep swinging.</p>
+              <div class="pill" style="color: var(--teal);">Instant cashout</div>
+            </div>
+          </div>
+        </section>
+
+        <section id="insights" class="section">
+          <div class="section-title">
+            <h2>Sharper insights, calmer plays.</h2>
+            <p>Track your history and keep the edge without chasing losses.</p>
+          </div>
+          <div class="grid">
+            <div class="card">
+              <div class="stat">
+                72% <span>Win rate on boosted picks</span>
+              </div>
+              <p style="margin-bottom: 0;">Boosts auto-pause when risk spikes.</p>
+            </div>
+            <div class="card">
+              <div class="stat">
+                $1,240 <span>Weekly bankroll target</span>
+              </div>
+              <p style="margin-bottom: 0;">Stay within a personalized limit set by you.</p>
+            </div>
+            <div class="card">
+              <div class="stat">
+                18+ <span>Age restriction</span>
+              </div>
+              <p style="margin-bottom: 0;">Play responsibly. Time-outs are one tap away.</p>
+            </div>
+          </div>
+        </section>
+
+        <section id="cta" class="cta-band">
+          <div class="cta-inner">
+            <div>
+              <div class="pill">Launch in minutes</div>
+              <h3>Join the sharp side of sports betting.</h3>
+              <p style="color: rgba(255, 255, 255, 0.7);">
+                Get tailored odds, live notifications, and smarter slips on every device.
+              </p>
+            </div>
+            <div class="cta-panel">
+              <p style="margin-top: 0;">Early access perks</p>
+              <ul style="margin: 0; padding-left: 18px; line-height: 1.7;">
+                <li>No-fee cashouts for 30 days</li>
+                <li>Priority VIP chat</li>
+                <li>Exclusive parlay boosts</li>
+              </ul>
+              <a class="cta" style="display: inline-block; margin-top: 16px;" href="#">Get early access</a>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <footer class="footer">
+        HighRoller is a demo landing page. Please gamble responsibly. 18+ only.
+      </footer>
+    </div>
+  </body>
+</html>
